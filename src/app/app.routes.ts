@@ -3,6 +3,7 @@ import { authGuard } from '@core';
 import { AdminLayoutComponent } from '@theme/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from '@theme/auth-layout/auth-layout.component';
 import { DashboardComponent } from './routes/dashboard/dashboard.component';
+import { ClientsComponent } from './routes/clients/clients.component';
 import { Error403Component } from './routes/sessions/403.component';
 import { Error404Component } from './routes/sessions/404.component';
 import { Error500Component } from './routes/sessions/500.component';
@@ -21,6 +22,9 @@ export const routes: Routes = [
       { path: '403', component: Error403Component },
       { path: '404', component: Error404Component },
       { path: '500', component: Error500Component },
+      {
+        path: 'clients', component: ClientsComponent
+      },
       {
         path: 'design',
         loadChildren: () => import('./routes/design/design.routes').then(m => m.routes),

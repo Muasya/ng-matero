@@ -7,10 +7,10 @@
       "icon": "dashboard"
     },
     {
-      "route": "connection",
-      "name": "connection",
+      "route": "clients",
+      "name": "clients",
       "type": "link",
-      "icon": "wifi"
+      "icon": "group"
     },
     {
       "route": "design",

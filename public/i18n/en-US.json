@@ -61,6 +61,8 @@
     "profile.settings": "Settings",
     "extensions": "Extensions",
     "blog": "Blog",
+    "clients": "Clients",
+    "network": "Network",
     "hostpot": "Hostpot",
     "pppoe": "PPPoE",
     "vpn": "VPN",
