@@ -10,10 +10,10 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-user-panel',
   template: `
     <div class="matero-user-panel" routerLink="/profile/overview">
-      <img class="matero-user-panel-avatar" [src]="user.avatar" alt="avatar" width="64" />
+      <img class="matero-user-panel-avatar" src="images/avatar.png" alt="avatar" width="64" />
       <div class="matero-user-panel-info">
-        <h4>{{ user.name }}</h4>
-        <h5>{{ user.email }}</h5>
+        <h4>User</h4>
+        <h5>user_example.com</h5>
       </div>
     </div>
   `,

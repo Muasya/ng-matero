@@ -144,7 +144,10 @@
 
 .matero-page-content {
   position: relative;
+  max-width: 1500px;
   padding: var(--gutter);
+  margin: auto;
+  margin-top: 20px;
 
   .matero-header + &,
   .matero-header-above &,

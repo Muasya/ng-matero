@@ -12,7 +12,7 @@ import { AuthService, SettingsService, User } from '@core';
   selector: 'app-user',
   template: `
     <button mat-icon-button [matMenuTriggerFor]="menu">
-      <img class="avatar" [src]="user.avatar" width="24" alt="avatar" />
+      <img class="avatar" src="images/avatar.png" width="24" alt="avatar" />
     </button>
 
     <mat-menu #menu="matMenu">
@@ -20,14 +20,14 @@ import { AuthService, SettingsService, User } from '@core';
         <mat-icon>account_circle</mat-icon>
         <span>{{ 'profile' | translate }}</span>
       </button>
-      <button routerLink="/profile/settings" mat-menu-item>
+      <!-- <button routerLink="/profile/settings" mat-menu-item>
         <mat-icon>edit</mat-icon>
         <span>{{ 'edit_profile' | translate }}</span>
-      </button>
-      <button mat-menu-item (click)="restore()">
+      </button> -->
+      <!-- <button mat-menu-item (click)="restore()">
         <mat-icon>restore</mat-icon>
         <span>{{ 'restore_defaults' | translate }}</span>
-      </button>
+      </button> -->
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>{{ 'logout' | translate }}</span>

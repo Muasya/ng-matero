@@ -47,8 +47,8 @@ export class ProfileSettingsComponent {
     company: ['', [Validators.required]],
     mobile: ['', [Validators.required]],
     tele: ['', [Validators.required]],
-    website: ['', [Validators.required]],
-    date: ['', [Validators.required]],
+    website: [''],
+    date: [''],
   });
 
   getErrorMessage(form: FormGroup<ControlsOf<IProfile>>) {

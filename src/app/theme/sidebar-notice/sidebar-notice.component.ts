@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-sidebar-notice',
@@ -10,41 +11,41 @@ import { MatTabsModule } from '@angular/material/tabs';
   },
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [MatTabsModule],
+  imports: [MatBadgeModule, MatTabsModule],
 })
 export class SidebarNoticeComponent {
   tabs = [
     {
-      label: 'Today',
+      label: 'Notifications',
       messages: [
         {
           icon: '🔔',
           color: 'bg-red-95',
-          title: 'General Meeting for update',
-          content: `You can use the Dashboard to explore how many new users download reports daily and monthly.`,
+          title: 'Head for Notification 1',
+          content: `You can use the Dashboard to explore how many new users joined daily and monthly.`,
         },
         {
           icon: '📢',
           color: 'bg-azure-95',
-          title: 'Widgets update',
-          content: `We've made some updates to the emendable widget which we think you are going to love.`,
+          title: 'Head for Notification 2',
+          content: `We've made some Notifications which we think you are going to love.`,
         },
         {
           icon: '⏳',
           color: 'bg-violet-95',
-          title: 'Coming soon new features',
-          content: `More new features are coming soon, so stay patient!`,
+          title: 'Head for Notification 3',
+          content: `More new features are coming soon, so stay tuned as our developers bring more features`,
         },
       ],
     },
     {
-      label: 'Notifications',
+      label: 'Updates',
       messages: [
         {
           icon: '📩',
           color: 'bg-magenta-95',
-          title: 'Weekly reports are available',
-          content: `Please go to the notification center to check your reports.`,
+          title: 'Head for Update 1',
+          content: `Please go to the Updates center to check your reports.`,
         },
       ],
     },

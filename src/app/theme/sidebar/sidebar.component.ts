@@ -26,7 +26,7 @@ import { UserPanelComponent } from './user-panel.component';
 })
 export class SidebarComponent {
   @Input() showToggle = true;
-  @Input() showUser = true;
+  @Input() showUser = false;
   @Input() showHeader = true;
   @Input() toggleChecked = false;
 

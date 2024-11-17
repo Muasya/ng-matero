@@ -78,7 +78,7 @@ export class CustomizerComponent {
     }
 
     this.drawerRef = this.drawer.open(templateRef, {
-      position: this.form.get('dir')?.value === 'rtl' ? 'left' : 'right',
+      position: this.form.get('dir')?.value === 'rtl' ? 'left' : 'bottom',
       width: '320px',
     });
 

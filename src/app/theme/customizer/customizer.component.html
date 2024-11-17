@@ -1,7 +1,6 @@
-<div class="customizer-handle" matTooltip="Drag me around"
-     cdkDrag (cdkDragStarted)="onDragStart($event)">
-  <button mat-fab (click)="openPanel(customizerPanel)">
-    <mat-icon aria-label="Example icon-button with a settings icon">settings</mat-icon>
+<div class="customizer-handle" matTooltip="">
+  <button mat-icon-button (click)="openPanel(customizerPanel)">
+    <mat-icon aria-label="Settings icon">settings</mat-icon>
   </button>
 </div>
 
@@ -12,8 +11,10 @@
       <mat-icon>close</mat-icon>
     </button>
   </h2>
-  <h3 class="f-w-400">Theme</h3>
-  <form [formGroup]="form">
+  <!-- <h3 class="f-w-400">Theme</h3> -->
+  <mat-divider inset class="m-x-0 m-y-24" />
+  <form [formGroup]="form" class="settings-contents">
+    <h3 class="f-w-400">Choose App Theme</h3>
     <div class="m-l-8">
       <mat-radio-group formControlName="theme">
         <mat-radio-button class="m-x-4" value="light">Light</mat-radio-button>
@@ -21,7 +22,7 @@
         <mat-radio-button class="m-x-4" value="auto">Auto</mat-radio-button>
       </mat-radio-group>
     </div>
-    <h3 class="f-w-400">Header</h3>
+    <!-- <h3 class="f-w-400">Header</h3>
     <div class="m-l-8">
       <mat-slide-toggle formControlName="showHeader"
                         [disableControl]="isHeaderPosAbove || isNavPosTop">Visible</mat-slide-toggle>
@@ -34,7 +35,7 @@
       </mat-radio-group>
     </div>
     <mat-divider inset class="m-x-0 m-y-24" />
-    <h3 class="f-w-400">Navigation</h3>
+    <h3 class="f-w-400">Navigation Position</h3>
     <div class="m-l-8">
       <mat-slide-toggle formControlName="showUserPanel">Show User Panel</mat-slide-toggle>
       <h4 class="f-w-400">Position</h4>
@@ -51,6 +52,6 @@
         <mat-radio-button class="m-x-4" value="ltr">LTR</mat-radio-button>
         <mat-radio-button class="m-x-4" value="rtl">RTL</mat-radio-button>
       </mat-radio-group>
-    </div>
+    </div> -->
   </form>
 </ng-template>

@@ -97,14 +97,14 @@
         <div class="col-sm-6 col-xl-4">
           <mat-form-field>
             <mat-label>Website</mat-label>
-            <input matInput placeholder="Simple placeholder" formControlName="website" required>
+            <input matInput placeholder="Simple placeholder" formControlName="website">
             @if (reactiveForm.get('website')?.invalid) {
               <mat-error>Please enter website</mat-error>
             }
           </mat-form-field>
         </div>
 
-        <div class="col-sm-6 col-xl-4">
+        <!-- <div class="col-sm-6 col-xl-4">
           <mat-form-field>
             <input matInput [matDatepicker]="picker2" placeholder="Choose a date"
               formControlName="date">
@@ -114,7 +114,7 @@
               <mat-error>Please enter website</mat-error>
             }
           </mat-form-field>
-        </div>
+        </div> -->
       </div>
 
       <div class="d-flex justify-content-end">
