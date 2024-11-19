@@ -10,7 +10,7 @@
     <mat-card-content>
       <form class="form-field-full" [formGroup]="registerForm">
         <mat-form-field appearance="outline">
-          <mat-label>{{'username' | translate}}</mat-label>
+          <mat-label>{{'email' | translate}}</mat-label>
           <input matInput formControlName="username" required>
           @if (registerForm.get('username')?.invalid) {
             <mat-error>
@@ -21,7 +21,8 @@
 
         <mat-form-field appearance="outline">
           <mat-label>{{'password' | translate}}</mat-label>
-          <input matInput type="password" formControlName="password" required>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+          <mat-icon class="visiblelityIcon" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           @if (registerForm.get('password')?.invalid) {
             <mat-error>
               <span>{{'validation.required' | translate}}</span>
@@ -31,7 +32,8 @@
 
         <mat-form-field appearance="outline">
           <mat-label>{{'confirm_password' | translate}}</mat-label>
-          <input matInput type="password" formControlName="confirmPassword" required>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" required>
+          <mat-icon class="visiblelityIcon" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           @if (registerForm.get('confirmPassword')?.hasError('required')) {
             <mat-error>
               <span>{{'validation.required' | translate}}</span>
@@ -47,7 +49,8 @@
 
         <mat-checkbox>{{'read_and_agree' | translate}}</mat-checkbox>
 
-        <button class="w-full m-y-16" mat-flat-button>{{'register' | translate}}</button>
+        <button class="w-full m-y-16" mat-flat-button (click)="register()">{{'register' | translate}}</button>
+        
 
         <div>
           <span>{{'have_an_account' | translate}}? </span>

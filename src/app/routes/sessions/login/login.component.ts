@@ -11,6 +11,8 @@ import { MtxButtonModule } from '@ng-matero/extensions/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators';
 
+import { MatIconModule } from '@angular/material/icon';
+
 import { AuthService } from '@core/authentication';
 
 @Component({
@@ -29,6 +31,7 @@ import { AuthService } from '@core/authentication';
     MatInputModule,
     MtxButtonModule,
     TranslateModule,
+    MatIconModule
   ],
 })
 export class LoginComponent {
@@ -37,11 +40,12 @@ export class LoginComponent {
   private readonly auth = inject(AuthService);
 
   isSubmitting = false;
+  hide = true;
 
   loginForm = this.fb.nonNullable.group({
-    username: ['ng-matero', [Validators.required]],
-    password: ['ng-matero', [Validators.required]],
-    rememberMe: [false],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+    // rememberMe: [false],
   });
 
   get username() {
@@ -56,15 +60,36 @@ export class LoginComponent {
     return this.loginForm.get('rememberMe')!;
   }
 
+  // login() {
+  //   this.isSubmitting = true;
+
+  //   this.auth
+  //     .login(this.username.value, this.password.value)
+  //     .pipe(filter(authenticated => authenticated))
+  //     .subscribe({
+  //       next: () => {
+  //         this.router.navigateByUrl('/');
+  //       },
+  //       error: (errorRes: HttpErrorResponse) => {
+  //         if (errorRes.status === 422) {
+  //           const form = this.loginForm;
+  //           const errors = errorRes.error.errors;
+  //           Object.keys(errors).forEach(key => {
+  //             form.get(key === 'email' ? 'username' : key)?.setErrors({
+  //               remote: errors[key][0],
+  //             });
+  //           });
+  //         }
+  //         this.isSubmitting = false;
+  //       },
+  //     });
+  // }
+
   login() {
     this.isSubmitting = true;
-
-    this.auth
-      .login(this.username.value, this.password.value, this.rememberMe.value)
-      .pipe(filter(authenticated => authenticated))
-      .subscribe({
+    this.auth.login(this.username.value, this.password.value).subscribe({
         next: () => {
-          this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/');
         },
         error: (errorRes: HttpErrorResponse) => {
           if (errorRes.status === 422) {
@@ -78,6 +103,9 @@ export class LoginComponent {
           }
           this.isSubmitting = false;
         },
-      });
-  }
+        complete: () => {
+          this.isSubmitting = false; // Ensure this is always set to false, even on success
+        }
+    });
+}
 }

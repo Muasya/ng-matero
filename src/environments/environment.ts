@@ -5,7 +5,10 @@
 export const environment = {
   production: false,
   baseUrl: '',
+  baseLink: 'http://localhost:5550/cl',
   useHash: false,
+  graphql_url : 'http://localhost:5550/graphql',
+  websocket_url : 'ws://localhost:5550/graphql'
 };
 
 /*
@@ -16,3 +19,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+

@@ -7,13 +7,13 @@
     <mat-card-content>
       <form class="form-field-full" [formGroup]="loginForm">
         <mat-form-field appearance="outline">
-          <mat-label>{{'username' | translate}}: ng-matero</mat-label>
-          <input matInput placeholder="ng-matero" formControlName="username" required>
+          <mat-label>{{'username' | translate}}</mat-label>
+          <input matInput placeholder="Enter Username/Email" formControlName="username" required>
           @if (username.invalid) {
             <mat-error>
               @if (username.errors?.required) {
                 <span>{{'please_enter' | translate}}
-                  <strong>ng-matero</strong>
+                  <strong>Username/Email</strong>
                 </span>
               }
               @if (username.errors?.remote) {
@@ -24,14 +24,15 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>{{'password' | translate}}: ng-matero</mat-label>
-          <input matInput placeholder="ng-matero" type="password"
+          <mat-label>{{'password' | translate}}</mat-label>
+          <input matInput placeholder="Enter Password" [type]="hide ? 'password' : 'text'"
             formControlName="password" required>
+            <mat-icon class="visiblelityIcon" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           @if (password.invalid) {
             <mat-error>
               @if (password.errors?.required) {
                 <span>{{'please_enter' | translate}}
-                  <strong>ng-matero</strong>
+                  <strong>Password</strong>
                 </span>
               }
               @if (password.errors?.remote) {
@@ -41,7 +42,7 @@
           }
         </mat-form-field>
 
-        <mat-checkbox formControlName="rememberMe">{{'remember_me' | translate}}</mat-checkbox>
+        <!-- <mat-checkbox formControlName="rememberMe">{{'remember_me' | translate}}</mat-checkbox> -->
 
         <button class="w-full m-y-16" mat-flat-button [disabled]="!!loginForm.invalid"
           [loading]="isSubmitting" (click)="login()">{{'login' | translate}}</button>
