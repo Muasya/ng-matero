@@ -108,46 +108,15 @@ export class RegisterComponent {
           },
           error: (loginErr) => {
              this.toast.error(loginErr.error?.message || 'Login after registration failed.');
-            console.error('Login error after registration:', loginErr);
           }
         });
       },
       error: (err) => {
         this.toast.error(err.error?.message || 'Registration failed.');
-        console.error('Registration error:', err);
       },
     });
 
   }
-
-
-  // register() {
-
-  //   if (this.registerForm.invalid) {
-  //     return; // Stop if the form is invalid
-  //   }
-
-  //   const { username, password, confirmPassword } = this.registerForm.value;
-
-  //   if (password !== confirmPassword) {
-  //     this.toast.error('Passwords do not match!'); // simple error handeling if passwords do not match
-  //     return;
-  //   }
-
-
-  //   this.registerService.register(username, password, confirmPassword).subscribe({
-  //     next: () => {
-  //       this.toast.success('Registration successful. Redirecting to dashboard...');
-  //       this.router.navigate(['/']); // Navigate to dashboard on success
-  //     },
-  //     error: (err) => {
-  //       // Handle errors (e.g., display error message)
-  //       this.toast.error(err.error?.message); // Display the specific error message if available
-  //       console.error('Registration error:', err);
-
-  //     },
-  //   });
-  // }
 
 
 }

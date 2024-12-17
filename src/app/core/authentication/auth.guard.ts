@@ -7,10 +7,6 @@ export const authGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnaps
   const auth = inject(AuthService);
   const router = inject(Router);
 
-  console.log('authGuard called with the following data');
-  console.log(auth.checkAuth());
-  console.log(auth.checkUser());
-
   // return auth.checkAuth() ? true : router.parseUrl('/auth/login');
   return auth.checkAuth() ? true : router.createUrlTree(['/auth/login'], { queryParams: { returnUrl: state.url }});
 

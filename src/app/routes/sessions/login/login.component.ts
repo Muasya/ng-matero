@@ -66,66 +66,17 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('rememberMe')!;
   }
 
-  // login() {
-  //   this.isSubmitting = true;
-
-  //   this.auth
-  //     .login(this.username.value, this.password.value)
-  //     .pipe(filter(authenticated => authenticated))
-  //     .subscribe({
-  //       next: () => {
-  //         this.router.navigateByUrl('/');
-  //       },
-  //       error: (errorRes: HttpErrorResponse) => {
-  //         if (errorRes.status === 422) {
-  //           const form = this.loginForm;
-  //           const errors = errorRes.error.errors;
-  //           Object.keys(errors).forEach(key => {
-  //             form.get(key === 'email' ? 'username' : key)?.setErrors({
-  //               remote: errors[key][0],
-  //             });
-  //           });
-  //         }
-  //         this.isSubmitting = false;
-  //       },
-  //     });
-  // }
-
-//   login() {
-//     this.isSubmitting = true;
-//     this.auth.login(this.username.value, this.password.value).subscribe({
-//         next: () => {
-//             this.router.navigateByUrl('/');
-//         },
-//         error: (errorRes: HttpErrorResponse) => {
-//           if (errorRes.status === 422) {
-//             const form = this.loginForm;
-//             const errors = errorRes.error.errors;
-//             Object.keys(errors).forEach(key => {
-//               form.get(key === 'email' ? 'username' : key)?.setErrors({
-//                 remote: errors[key][0],
-//               });
-//             });
-//           }
-//           this.isSubmitting = false;
-//         },
-//         complete: () => {
-//           this.isSubmitting = false; // Ensure this is always set to false, even on success
-//         }
-//     });
-// }
-
-login() {
-  this.isSubmitting = true;  // Set loading state
-  this.auth.login(this.username.value, this.password.value).subscribe({
-      next: () => this.router.navigate(['/']), // Redirect only after a successful login
-      error: (e: any) => {
-        console.error(e);
-        this.isSubmitting = false;
-      },
-      complete: () => this.isSubmitting = false, // Ensure loading state is reset
-  });
-}
+  login() {
+    this.isSubmitting = true;  // Set loading state
+    this.auth.login(this.username.value, this.password.value).subscribe({
+        next: () => this.router.navigate(['/']), // Redirect only after a successful login
+        error: (e: any) => {
+          console.error(e);
+          this.isSubmitting = false;
+        },
+        complete: () => this.isSubmitting = false, // Ensure loading state is reset
+    });
+  }
 
 
 }

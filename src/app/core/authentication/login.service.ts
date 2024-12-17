@@ -28,25 +28,15 @@ export class LoginService {
     return this.http.post<any>(`${baseUrl}/logout`, {}, { withCredentials: true});
   }
 
-  // me() {
-  //   console.log('me called');
-  //   return this.http.post<any>(`${baseUrl}/me`, {}, { withCredentials: true});
-  // }
   me() {
-    console.log('[LoginService:me] Fetching user info...');
     return this.http.post<any>(`${baseUrl}/me`, {}, { withCredentials: true }).pipe(
-      tap(user => console.log('[LoginService:me] User info fetched:', user))
+      tap(user => {})
     );
   }
 
-  // menu() {
-  //   return this.http.get<{ menu: Menu[] }>(`/me/menu`).pipe(map(res => res.menu));
-  // }
   menu() {
-    console.log('[LoginService:menu] Fetching menu...');
     return this.http.get<{ menu: Menu[] }>(`${baseUrl}/menu`).pipe(
       map(res => res.menu),
-      tap(menu => console.log('[LoginService:menu] Menu fetched:', menu))
     );
   }
 

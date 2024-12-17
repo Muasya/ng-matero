@@ -58,7 +58,7 @@ export class SidemenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.menu$.pipe(
-        tap(menu => console.log('[SideMenuComponent] Menu:', menu)) // Log the menu in SidemenuComponent
+        tap(menu => {}) // Log the menu in SidemenuComponent
     ).subscribe();
 }
 
