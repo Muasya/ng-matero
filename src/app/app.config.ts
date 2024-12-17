@@ -12,7 +12,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { ToastrModule } from 'ngx-toastr';
-
+import { APP_INITIALIZER, isDevMode } from '@angular/core';
 import { BASE_URL, appInitializerProviders, httpInterceptorProviders } from '@core';
 import { environment } from '@env/environment';
 import { PaginatorI18nService } from '@shared';
@@ -51,6 +51,17 @@ export const appConfig: ApplicationConfig = {
         passThruUnknownUrl: true,
       })
     ),
+    // {
+    //   provide: APP_INITIALIZER, // Use APP_INITIALIZER
+    //   useFactory: (authService: AuthService, startupService: StartupService, translateLangService: TranslateLangService) => () =>
+    //     Promise.all([
+    //       authService.init(), // Ensure AuthService initializes first
+    //       startupService.load(),
+    //       translateLangService.load(),
+    //     ]),
+    //   deps: [AuthService, StartupService, TranslateLangService],
+    //   multi: true,
+    // },
     { provide: BASE_URL, useValue: environment.baseUrl },
     httpInterceptorProviders,
     appInitializerProviders,

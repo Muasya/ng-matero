@@ -1,9 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AsyncPipe, NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { map, tap } from 'rxjs';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnInit,
   ViewEncapsulation,
   inject,
 } from '@angular/core';
@@ -50,9 +52,15 @@ import { NavAccordionDirective } from './nav-accordion.directive';
     ]),
   ],
 })
-export class SidemenuComponent {
+export class SidemenuComponent implements OnInit {
   // The ripple effect makes page flashing on mobile
   @Input() ripple = false;
+
+  ngOnInit(): void {
+    this.menu$.pipe(
+        tap(menu => console.log('[SideMenuComponent] Menu:', menu)) // Log the menu in SidemenuComponent
+    ).subscribe();
+}
 
   private readonly menu = inject(MenuService);
 

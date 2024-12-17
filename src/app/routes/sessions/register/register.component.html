@@ -47,10 +47,10 @@
           }
         </mat-form-field>
 
-        <mat-checkbox>{{'read_and_agree' | translate}}</mat-checkbox>
+        <mat-checkbox formControlName="acceptTerms" >{{'read_and_agree' | translate}}</mat-checkbox>
 
-        <button class="w-full m-y-16" mat-flat-button (click)="register()">{{'register' | translate}}</button>
-        
+        <button class="w-full m-y-16" mat-flat-button (click)="register()" [disabled]="!registerForm.valid">{{'register' | translate}}</button>
+
 
         <div>
           <span>{{'have_an_account' | translate}}? </span>

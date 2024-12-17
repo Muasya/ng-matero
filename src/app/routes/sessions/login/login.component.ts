@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -34,10 +34,16 @@ import { AuthService } from '@core/authentication';
     MatIconModule
   ],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
+
+  ngOnInit() { // Add an ngOnInit lifecycle hook
+    if (this.auth.checkAuth()) { // Check if user is already authenticated
+      this.router.navigate(['/']); // Redirect to the main/dashboard route
+    }
+  }
 
   isSubmitting = false;
   hide = true;
@@ -85,27 +91,41 @@ export class LoginComponent {
   //     });
   // }
 
-  login() {
-    this.isSubmitting = true;
-    this.auth.login(this.username.value, this.password.value).subscribe({
-        next: () => {
-            this.router.navigateByUrl('/');
-        },
-        error: (errorRes: HttpErrorResponse) => {
-          if (errorRes.status === 422) {
-            const form = this.loginForm;
-            const errors = errorRes.error.errors;
-            Object.keys(errors).forEach(key => {
-              form.get(key === 'email' ? 'username' : key)?.setErrors({
-                remote: errors[key][0],
-              });
-            });
-          }
-          this.isSubmitting = false;
-        },
-        complete: () => {
-          this.isSubmitting = false; // Ensure this is always set to false, even on success
-        }
-    });
+//   login() {
+//     this.isSubmitting = true;
+//     this.auth.login(this.username.value, this.password.value).subscribe({
+//         next: () => {
+//             this.router.navigateByUrl('/');
+//         },
+//         error: (errorRes: HttpErrorResponse) => {
+//           if (errorRes.status === 422) {
+//             const form = this.loginForm;
+//             const errors = errorRes.error.errors;
+//             Object.keys(errors).forEach(key => {
+//               form.get(key === 'email' ? 'username' : key)?.setErrors({
+//                 remote: errors[key][0],
+//               });
+//             });
+//           }
+//           this.isSubmitting = false;
+//         },
+//         complete: () => {
+//           this.isSubmitting = false; // Ensure this is always set to false, even on success
+//         }
+//     });
+// }
+
+login() {
+  this.isSubmitting = true;  // Set loading state
+  this.auth.login(this.username.value, this.password.value).subscribe({
+      next: () => this.router.navigate(['/']), // Redirect only after a successful login
+      error: (e: any) => {
+        console.error(e);
+        this.isSubmitting = false;
+      },
+      complete: () => this.isSubmitting = false, // Ensure loading state is reset
+  });
 }
+
+
 }

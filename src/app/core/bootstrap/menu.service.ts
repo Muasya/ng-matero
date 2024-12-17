@@ -17,6 +17,7 @@ export interface MenuChildrenItem {
   type: 'link' | 'sub' | 'extLink' | 'extTabLink';
   children?: MenuChildrenItem[];
   permissions?: MenuPermissions;
+  icon?: string;
 }
 
 export interface Menu {

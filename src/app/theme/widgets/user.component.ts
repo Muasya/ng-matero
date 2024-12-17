@@ -64,6 +64,7 @@ export class UserComponent implements OnInit {
 
   logout() {
     this.auth.logout().subscribe(() => {
+      console.log('Logout successful');
       this.router.navigateByUrl('/auth/login');
     });
   }

@@ -60,3 +60,4 @@ export class TokenInterceptor implements HttpInterceptor {
     return new RegExp(`^${baseUrl}`, 'i').test(url);
   }
 }
+

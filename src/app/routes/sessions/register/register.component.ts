@@ -17,6 +17,7 @@ import { Router, RouterLink } from '@angular/router'; // Import Router
 import { ToastrService } from 'ngx-toastr'; // Import ToastrService
 
 import { RegisterService } from '../../../../app/core/authentication/register.service';
+import { AuthService } from '@core/authentication'; // Import AuthService
 
 @Component({
   selector: 'app-register',
@@ -38,6 +39,7 @@ import { RegisterService } from '../../../../app/core/authentication/register.se
 })
 export class RegisterComponent {
   private readonly fb = inject(FormBuilder);
+  private auth = inject(AuthService);
 
   hide = true;
   protected readonly registerService = inject(RegisterService);
@@ -49,6 +51,7 @@ export class RegisterComponent {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
+      acceptTerms: [false, [Validators.requiredTrue]],
     },
     {
       validators: [this.matchValidator('password', 'confirmPassword')],
@@ -86,6 +89,7 @@ export class RegisterComponent {
       if (!username) this.toast.error('Please provide a username');
       if (!password) this.toast.error('Please provide a password');
       if (!confirmPassword) this.toast.error('Please confirm the password');
+      if (!this.registerForm.get('acceptTerms')?.value) this.toast.error('Please accept the terms and conditions');
       return;
     }
 
@@ -96,15 +100,27 @@ export class RegisterComponent {
 
     this.registerService.register(username, password, confirmPassword).subscribe({
       next: () => {
-        this.toast.success('Registration successful. Redirecting to dashboard...');
-        this.router.navigate(['/']);
+        this.toast.success('Registration successful. Logging in...');
+        // Manually log in the user after successful registration
+        this.auth.login(username, password).subscribe({ // call login in authService
+          next: () => {
+            this.router.navigate(['/']);
+          },
+          error: (loginErr) => {
+             this.toast.error(loginErr.error?.message || 'Login after registration failed.');
+            console.error('Login error after registration:', loginErr);
+          }
+        });
       },
       error: (err) => {
-        this.toast.error(err.error?.message || 'Registration failed.'); // Default error message if none provided
+        this.toast.error(err.error?.message || 'Registration failed.');
         console.error('Registration error:', err);
       },
     });
+
   }
+
+
   // register() {
 
   //   if (this.registerForm.invalid) {

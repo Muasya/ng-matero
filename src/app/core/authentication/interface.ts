@@ -1,17 +1,19 @@
-export interface User {
-  [prop: string]: any;
+// interface.ts
 
-  id?: number | string | null;
-  name?: string;
+export interface User {
+  [prop: string]: any | null;
+  userId?: number | string | null;
+  username?: string;
   email?: string;
-  avatar?: string;
-  roles?: any[];
-  permissions?: any[];
+  avatar?: string | null;
+  role?: string;
+  roles?: any[] | null;
+  permissions?: any[] | null;
+  isAuthenticated?: boolean;
 }
 
 export interface Token {
   [prop: string]: any;
-
   access_token: string;
   token_type?: string;
   expires_in?: number;

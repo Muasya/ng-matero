@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 import { Menu } from '@core';
 import { Token, User } from './interface';
@@ -12,6 +12,7 @@ export const baseUrl = environment.baseLink;
   providedIn: 'root',
 })
 export class LoginService {
+
   protected readonly http = inject(HttpClient);
 
   login(username: string, password: string) {
@@ -20,19 +21,34 @@ export class LoginService {
   }
 
   refresh(params: Record<string, any>) {
-    return this.http.post<Token>(`${baseUrl}/refresh`, params);
+    return this.http.post<Token>(`${baseUrl}/refresh`, params, { withCredentials: true});
   }
 
   logout() {
-    return this.http.post<any>(`${baseUrl}/logout`, {});
+    return this.http.post<any>(`${baseUrl}/logout`, {}, { withCredentials: true});
   }
 
+  // me() {
+  //   console.log('me called');
+  //   return this.http.post<any>(`${baseUrl}/me`, {}, { withCredentials: true});
+  // }
   me() {
-    return this.http.get<User>(`${baseUrl}/me`);
+    console.log('[LoginService:me] Fetching user info...');
+    return this.http.post<any>(`${baseUrl}/me`, {}, { withCredentials: true }).pipe(
+      tap(user => console.log('[LoginService:me] User info fetched:', user))
+    );
   }
 
+  // menu() {
+  //   return this.http.get<{ menu: Menu[] }>(`/me/menu`).pipe(map(res => res.menu));
+  // }
   menu() {
-    return this.http.get<{ menu: Menu[] }>(`${baseUrl}/me/menu`).pipe(map(res => res.menu));
+    console.log('[LoginService:menu] Fetching menu...');
+    return this.http.get<{ menu: Menu[] }>(`${baseUrl}/menu`).pipe(
+      map(res => res.menu),
+      tap(menu => console.log('[LoginService:menu] Menu fetched:', menu))
+    );
   }
-}
 
+
+}
