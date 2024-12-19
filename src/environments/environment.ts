@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: '',
-  baseLink: 'http://localhost:5550/cl',
+  baseLink: 'http://localhost:5550',
   useHash: false,
   graphql_url : 'http://localhost:5550/graphql',
   websocket_url : 'ws://localhost:5550/graphql'

@@ -83,6 +83,9 @@ export class RegisterComponent {
     const username = this.registerForm.get('username')?.value?.trim();
     const password = this.registerForm.get('password')?.value?.trim();
     const confirmPassword = this.registerForm.get('confirmPassword')?.value?.trim();
+    // put default role as client
+    const role = 'client';
+
 
     // Check if any of the values are null/undefined
     if (!username || !password || !confirmPassword) {
@@ -98,7 +101,7 @@ export class RegisterComponent {
       return;
     }
 
-    this.registerService.register(username, password, confirmPassword).subscribe({
+    this.registerService.register(username, password, confirmPassword, role).subscribe({
       next: () => {
         this.toast.success('Registration successful. Logging in...');
         // Manually log in the user after successful registration

@@ -12,8 +12,8 @@ export const baseUrl = environment.baseLink;  // Make sure the base URL is acces
 export class RegisterService {
   protected readonly http = inject(HttpClient);
 
-  register(username: string, password: string, confirmPassword: string) { // Add confirmPassword
-    return this.http.post(`${baseUrl}/register`, { username, password, confirmPassword }, { withCredentials: true }); // Send credentials, withCredentials: true for cross-origin requests
+  register(username: string, password: string, confirmPassword: string, role: string) { // Add confirmPassword
+    return this.http.post(`${baseUrl}/register`, { username, password, confirmPassword, role }, { withCredentials: true }); // Send credentials, withCredentials: true for cross-origin requests
   }
 }
 

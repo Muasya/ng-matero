@@ -26,10 +26,6 @@ export const routes: Routes = [
         path: 'clients', component: ClientsComponent
       },
       {
-        path: 'design',
-        loadChildren: () => import('./routes/design/design.routes').then(m => m.routes),
-      },
-      {
         path: 'forms',
         loadChildren: () => import('./routes/forms/forms.routes').then(m => m.routes),
       },

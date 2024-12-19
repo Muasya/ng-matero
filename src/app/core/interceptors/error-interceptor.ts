@@ -18,17 +18,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   private readonly errorPages = [STATUS.FORBIDDEN, STATUS.NOT_FOUND, STATUS.INTERNAL_SERVER_ERROR];
 
-  // private getMessage = (error: HttpErrorResponse) => {
-  //   if (error.error?.message) {
-  //     return error.error.message;
-  //   }
-
-  //   if (error.error?.msg) {
-  //     return error.error.msg;
-  //   }
-
-  //   return `${error.status} ${error.statusText}`;
-  // };
 
   private getMessage(error: HttpErrorResponse) {
 
@@ -46,12 +35,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     // Fallback to the status and text if no server message is found
-    return `${error.status} ${error.statusText}`; 
+    return `${error.status} ${error.statusText}`;
   }
 
-  // intercept(req: HttpRequest<unknown>, next: HttpHandler) {
-  //   return next.handle(req).pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
-  // }
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler) {
     return next.handle(req).pipe(
@@ -65,13 +51,13 @@ export class ErrorInterceptor implements HttpInterceptor {
         skipLocationChange: true,
       });
     } else {
-      console.error('ERROR', error);
+      // console.error('ERROR', error);
       // this.toast.error(this.getMessage(error));
       if (!(this.errorPages.includes(error.status))) { // Check to prevent double error log
-        this.toast.error(this.getMessage(error)); // It will now use the improved getMessage
+        // this.toast.error(this.getMessage(error)); // It will now use the improved getMessage
       }
       if (error.status === STATUS.UNAUTHORIZED) {
-        this.router.navigateByUrl('/auth/login');
+        // this.router.navigateByUrl('/auth/login');
       }
     }
 

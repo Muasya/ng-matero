@@ -1,57 +1,111 @@
-<div class="d-flex w-full h-full">
-  <mat-card class="m-auto" style="max-width: 380px;">
-    <mat-card-header class="m-b-24">
-      <mat-card-title>👋 {{'login_title' | translate}}!</mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-      <form class="form-field-full" [formGroup]="loginForm">
-        <mat-form-field appearance="outline">
-          <mat-label>{{'username' | translate}}</mat-label>
-          <input matInput placeholder="Enter Username/Email" formControlName="username" required>
-          @if (username.invalid) {
-            <mat-error>
-              @if (username.errors?.required) {
-                <span>{{'please_enter' | translate}}
-                  <strong>Username/Email</strong>
-                </span>
-              }
-              @if (username.errors?.remote) {
-                <span>{{ username.errors?.remote }}</span>
-              }
-            </mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'password' | translate}}</mat-label>
-          <input matInput placeholder="Enter Password" [type]="hide ? 'password' : 'text'"
-            formControlName="password" required>
-            <mat-icon class="visiblelityIcon" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          @if (password.invalid) {
-            <mat-error>
-              @if (password.errors?.required) {
-                <span>{{'please_enter' | translate}}
-                  <strong>Password</strong>
-                </span>
-              }
-              @if (password.errors?.remote) {
-                <span>{{ password.errors?.remote }}</span>
-              }
-            </mat-error>
-          }
-        </mat-form-field>
-
-        <!-- <mat-checkbox formControlName="rememberMe">{{'remember_me' | translate}}</mat-checkbox> -->
-
-        <button class="w-full m-y-16" mat-flat-button [disabled]="!!loginForm.invalid"
-          [loading]="isSubmitting" (click)="login()">{{'login' | translate}}</button>
-
-        <div>
-          <span>{{'have_no_account' | translate}}? </span>
-          <a routerLink="/auth/register">{{'create_one_account' | translate}}</a>
+<div class="login-page">
+  <!-- Main container with theme support -->
+  <div class="login-container">
+    <!-- Left Section - Marketing Content (hidden on mobile) -->
+    <div class="content-section">
+      <div class="content-wrapper">
+        <div class="feature-header">
+          <mat-icon class="feature-icon">rocket_launch</mat-icon>
+          <h1>Transform Your Network</h1>
+          <p>Connecting millions everyday</p>
         </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <mat-icon>security</mat-icon>
+            <h3>Enterprise Security</h3>
+            <p>Bank-grade encryption and security protocols</p>
+          </div>
+          <div class="feature-item">
+            <mat-icon>speed</mat-icon>
+            <h3>High Performance</h3>
+            <p>Lightning-fast response times</p>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">This platform has streamlined our entire operation workflow.</p>
+          <div class="author">
+            <div class="author-info">
+              <div class="author-name">Muasya Muli</div>
+              <div class="author-title">CTO at TechCorp</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Section - Login Form -->
+    <div class="form-section">
+      <mat-card class="login-card">
+        <mat-card-header>
+          <mat-card-title>
+            <h2>👋 {{'login_title' | translate}}!</h2>
+            <p class="subtitle">Welcome back! Please sign in to continue</p>
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <form class="login-form" [formGroup]="loginForm">
+            <mat-form-field appearance="outline">
+              <mat-label>{{'username' | translate}}</mat-label>
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <input matInput placeholder="Enter Username/Email" formControlName="username" required>
+              @if (username.invalid) {
+                <mat-error>
+                  @if (username.errors?.required) {
+                    <span>{{'please_enter' | translate}} <strong>Username/Email</strong></span>
+                  }
+                  @if (username.errors?.remote) {
+                    <span>{{ username.errors?.remote }}</span>
+                  }
+                </mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>{{'password' | translate}}</mat-label>
+              <mat-icon matPrefix>lock_outline</mat-icon>
+              <input matInput placeholder="Enter Password" [type]="hide ? 'password' : 'text'"
+                formControlName="password" required>
+              <mat-icon class="visibility-icon" matSuffix (click)="hide = !hide">
+                {{hide ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+              @if (password.invalid) {
+                <mat-error>
+                  @if (password.errors?.required) {
+                    <span>{{'please_enter' | translate}} <strong>Password</strong></span>
+                  }
+                  @if (password.errors?.remote) {
+                    <span>{{ password.errors?.remote }}</span>
+                  }
+                </mat-error>
+              }
+            </mat-form-field>
+
+            <div class="form-actions">
+              <mat-checkbox color="primary" formControlName="rememberMe">
+                {{'remember_me' | translate}}
+              </mat-checkbox>
+              <a class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <button mat-flat-button color="primary" class="submit-button"
+                    [disabled]="loginForm.invalid" [loading]="isSubmitting"
+                    (click)="login()">
+              {{'login' | translate}}
+            </button>
+
+            <div class="register-prompt">
+              <span>{{'have_no_account' | translate}}? </span>
+              <a routerLink="/auth/register" color="primary">
+                {{'create_one_account' | translate}}
+              </a>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
